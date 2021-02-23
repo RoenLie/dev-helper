@@ -1,23 +1,27 @@
-<script lang="ts">
+<script>
+	import Test from "./app/core/test.svelte";
+
 	export let name: string;
 </script>
 
-<main>
-	<h1>Hello jabadaba {name}!</h1>
-	<p>Visit the
-    <a href="https://svelte.dev/tutorial">
-      Svelte tutorialtest
-    </a>
-    to learn how to build Svelte apps.
-  </p>
-</main>
+<template lang="pug">
+	div.main Hei h1.h1 kakaka {name}
+	span.bigone lalala
+	Test
+	h1 lala
+</template>
 
-<style>
-	main {
+<style lang="scss">
+	.main {
+		background-color: black;
 		text-align: center;
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+
+		&:hover {
+			background-color: pink;
+		}
 	}
 	h1 {
 		color: #ff3e00;
@@ -26,7 +30,7 @@
 		font-weight: 100;
 	}
 	@media (min-width: 640px) {
-		main {
+		.main {
 			max-width: none;
 		}
 	}
