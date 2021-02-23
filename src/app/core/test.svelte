@@ -1,4 +1,5 @@
-<script></script>
+<script>
+</script>
 
 <template lang="pug">
   div TEST COMPONENT

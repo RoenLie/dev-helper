@@ -417,11 +417,11 @@ var app = (function () {
     			create_component(test.$$.fragment);
     			h1 = element("h1");
     			h1.textContent = "lala";
-    			attr_dev(div, "class", "main svelte-k05zwc");
+    			attr_dev(div, "class", "main svelte-1mls7jk");
     			add_location(div, file$1, 4, 0, 83);
-    			attr_dev(span, "class", "bigone");
+    			attr_dev(span, "class", "bigone svelte-1mls7jk");
     			add_location(span, file$1, 4, 47, 130);
-    			attr_dev(h1, "class", "svelte-k05zwc");
+    			attr_dev(h1, "class", "svelte-1mls7jk");
     			add_location(h1, file$1, 4, 94, 177);
     		},
     		l: function claim(nodes) {
