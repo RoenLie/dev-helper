@@ -3,7 +3,6 @@ const sveltePreprocess = require('svelte-preprocess');
 const preprocessOptions = {
     sourceMap: true, // "you would always want sourcemaps for the IDE" – dummdidumm
     defaults: {
-        markup: "pug",
         script: "typescript",
         style: "scss",
     },

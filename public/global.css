@@ -5,6 +5,9 @@ html, body {
   margin: 0;
   padding: 0;
 
+  background-color: rgba(var(--bg-color-1));
+  color: rgba(var(--txt-color-1));
+
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
   overflow: hidden;
@@ -15,4 +18,9 @@ html, body {
   font-size: 1em;
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

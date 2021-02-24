@@ -1,18 +1,14 @@
 :root {
-  --bg-body: 30, 30, 30;
-  --bg-color-1: 30, 30, 30;
+  --bg-color-1: 35, 35, 35;
+  --bg-highlight-color-1: 60, 60, 60;
+  --txt-color-1: 250, 250, 250;
+  --border-color-1: 140, 140, 140;
 
-  --quali-bg-color: 43, 182, 115;
-  --quali-txt-color: 255, 255, 255;
+  --border-burg-1: 152,25,16;
 
-  --txt-color-1: 255, 255, 255;
+  --nav-bg-1: 25,25,25;
 
-  --bg-nav-top-1: 20, 20, 20;
-  --border-nav-top-1: 180, 180, 180;
+  --nav-top-height: 5vh;
 
-  --icon-active-1: 0, 0, 0;
-
-  --nav-top-height: 6em;
-
-  --view-height: calc(100vh - var(--nav-top-height));
+  --router-view-height: calc(100vh-var(var(--nav-top-height)));
 }

@@ -6,22 +6,24 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import json from '@rollup/plugin-json';
+import del from 'rollup-plugin-delete'
+import { publicDecrypt } from 'crypto';
 const preprocessOptions = require("./svelte.config").preprocessOptions;
 
 
 const production = !process.env.ROLLUP_WATCH;
 
-function serve() {
+function serve () {
 	let server;
 
-	function toExit() {
+	function toExit () {
 		if (server) server.kill(0);
 	}
 
 	return {
-		writeBundle() {
+		writeBundle () {
 			if (server) return;
-			// server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
 			server = require('child_process').spawn('npm', ['run', 'svelte-start', '--', '--dev'], {
 				stdio: ['ignore', 'inherit', 'inherit'],
 				shell: true
@@ -34,13 +36,12 @@ function serve() {
 }
 
 export default {
-	// input: 'src/main.js',
 	input: 'src/svelte.ts',
 	output: {
-		sourcemap: true,
-		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		format: 'es',
+		sourcemap: true,
+		dir: 'public/build/',
 	},
 	plugins: [
 		svelte({
@@ -53,6 +54,11 @@ export default {
 				dev: !production
 			}
 		}),
+
+		// del({
+		// 	targets: 'public/build/*'
+		// }),
+
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
@@ -81,7 +87,29 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		// json stuff
+		json({
+			// All JSON files will be parsed by default,
+			// but you can also specifically include/exclude files
+			// include: 'node_modules/**',
+			// exclude: ['node_modules/foo/**', 'node_modules/bar/**'],
+
+			// for tree-shaking, properties will be declared as
+			// variables, using either `var` or `const`
+			preferConst: true, // Default: false
+
+			// specify indentation for the generated default export —
+			// defaults to '\t'
+			indent: '  ',
+
+			// ignores indent and generates the smallest code
+			compact: true, // Default: false
+
+			// generate a named export for every property of the JSON object
+			namedExports: true // Default: true
+		})
 	],
 	watch: {
 		clearScreen: false

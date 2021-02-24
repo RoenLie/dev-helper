@@ -1,0 +1,18 @@
+[
+    {
+        "path": "#/",
+        "label": "HOME"
+    },
+    {
+        "path": "#/scripts",
+        "label": "SCRIPTS"
+    },
+    {
+        "path": "#/settings",
+        "label": "SETTINGS"
+    },
+    {
+        "path": "#/404",
+        "label": "404"
+    }
+]
