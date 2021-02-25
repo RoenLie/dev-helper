@@ -9,6 +9,9 @@
     "public/*"
   ],
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
     "module": "esnext",
     "resolveJsonModule": true
   }

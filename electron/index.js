@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+require('update-electron-app')();
 require('electron-reload')(__dirname, {
   electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
   awaitWriteFinish: true,
@@ -14,6 +15,9 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+    },
     width: 800,
     height: 600,
   });
