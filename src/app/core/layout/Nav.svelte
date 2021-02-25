@@ -25,6 +25,7 @@
 		color: rgba(var(--txt-color-1));
 
 		border-bottom: 2px solid rgba(var(--border-burg-1));
+		height: var(--nav-top-height);
 
 		display: grid;
 		column-gap: 1em;
@@ -42,6 +43,10 @@
 			&:hover {
 				background-color: rgba(var(--bg-highlight-color-1));
 			}
+		}
+
+		& ~ * {
+			height: var(--router-view-height);
 		}
 	}
 </style>

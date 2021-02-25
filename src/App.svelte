@@ -16,4 +16,8 @@
 	</section>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+	section {
+		height: 100%;
+	}
+</style>

@@ -8,7 +8,7 @@
 
   --nav-bg-1: 25,25,25;
 
-  --nav-top-height: 5vh;
+  --nav-top-height: 4em;
 
-  --router-view-height: calc(100vh-var(var(--nav-top-height)));
+  --router-view-height: calc(100vh - var(--nav-top-height));
 }
