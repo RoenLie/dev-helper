@@ -1,7 +1,7 @@
 {
   "name": "dev-helper",
   "productName": "dev-helper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dev helper tooling for running scripts and other utilities.",
   "main": "electron/index.js",
   "repository": {
