@@ -43,21 +43,17 @@
 
 <ScriptAction>
     <template use:fragment>
-        <button on:click={grunt}> Grunt </button>
+        <button on:click={grunt}> Elastic Index </button>
     </template>
 
     <template use:fragment slot="options">
         <div>
-            <label for="gruntBuild">Build</label>
+            <label for="gruntBuild">regular</label>
             <input id="gruntBuild" type="radio" bind:group={build} value={1} />
         </div>
         <div>
-            <label for="gruntWatch">Watch</label>
+            <label for="gruntWatch">masterdata</label>
             <input id="gruntWatch" type="radio" bind:group={build} value={0} />
-        </div>
-        <div>
-            <label for="gruntForce">Force</label>
-            <input id="gruntForce" type="checkbox" />
         </div>
     </template>
 </ScriptAction>

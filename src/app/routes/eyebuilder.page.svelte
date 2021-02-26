@@ -1,8 +1,6 @@
 <script>
 </script>
 
-<template>
-	<div>Home</div>
-</template>
+<div>EYEBUILDER ROUTE</div>
 
 <style lang="scss"></style>

@@ -1,4 +1,5 @@
 <script>
+    import ScriptAction, { fragment } from "./script-action.svelte";
     import { createEventDispatcher } from "svelte";
     import { cleanPwsOutput } from "../../utilities/cleanPwsOutput";
 
@@ -63,11 +64,16 @@
 </script>
 
 <!-- ---------------------------------------------------------------------- -->
-<template>
-    <div class="wrapper">
-        <button on:click={openSolutions}> Open Solutions </button>
 
-        <div class="input-wrapper">
+<ScriptAction>
+    <template use:fragment>
+        <button class="action" on:click={openSolutions}>
+            Open Solutions
+        </button>
+    </template>
+
+    <template use:fragment slot="options">
+        <div>
             <label for="all">All</label>
             <input
                 id="all"
@@ -78,9 +84,8 @@
                 }}
             />
         </div>
-
         {#each solutions as solution}
-            <div class="input-wrapper">
+            <div>
                 <label for={solution.name}>{solution.name}</label>
                 <input
                     id={solution.name}
@@ -89,36 +94,8 @@
                 />
             </div>
         {/each}
-    </div>
-</template>
+    </template>
+</ScriptAction>
 
 <!-- ---------------------------------------------------------------------- -->
-<style lang="scss">
-    .wrapper {
-        display: grid;
-        grid-auto-columns: auto;
-        column-gap: 1em;
-        > * {
-            grid-row: 1;
-        }
-    }
-
-    .input-wrapper {
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .output-wrapper {
-        overflow: auto;
-        display: flex;
-        flex-direction: column-reverse;
-        .output {
-            display: flex;
-            flex-direction: column-reverse;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-    }
-</style>
+<style lang="scss"></style>

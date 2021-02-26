@@ -15,6 +15,11 @@ export default {
         userData: { layout: Nav }
     }),
 
+    "/eyebuilder": wrap({
+        asyncComponent: () => import("../routes/eyebuilder.page.svelte"),
+        userData: { layout: Nav }
+    }),
+
     "/settings": wrap({
         asyncComponent: () => import("../routes/settings.page.svelte"),
         userData: { layout: Nav }

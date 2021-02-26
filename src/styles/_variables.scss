@@ -3,12 +3,34 @@
   --bg-highlight-color-1: 60, 60, 60;
   --txt-color-1: 250, 250, 250;
   --border-color-1: 140, 140, 140;
+  --border-color-2: 43, 61, 80;
 
   --border-burg-1: 152,25,16;
+  --button-1: 55,71,79;
+  --button-text-1: 250,250,250;
+  --button-hover-1: 178, 235, 242;
+  --button-hover-text-1: 0,0,0;
 
   --nav-bg-1: 25,25,25;
 
-  --nav-top-height: 4em;
+  --shadow-1: 5,5,5;
 
+
+  --nav-top-height: 4em;
   --router-view-height: calc(100vh - var(--nav-top-height));
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.75em;
+    height: 0.75em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.09);
+  }
 }

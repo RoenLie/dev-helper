@@ -1,15 +1,19 @@
 [
     {
         "path": "#/",
-        "label": "HOME"
+        "label": "Home"
     },
     {
         "path": "#/scripts",
-        "label": "SCRIPTS"
+        "label": "Scripts"
+    },
+    {
+        "path": "#/eyebuilder",
+        "label": "EyeBuilder"
     },
     {
         "path": "#/settings",
-        "label": "SETTINGS"
+        "label": "Settings"
     },
     {
         "path": "#/404",

@@ -2,7 +2,17 @@
 </script>
 
 <template>
-    <div>SETTINGS</div>
+    <div class="wrapper">
+        <div>SETTINGS</div>
+        <div />
+    </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+    .wrapper {
+        display: flex;
+        flex-flow: column nowrap;
+        height: var(--router-view-height);
+        padding: 1em;
+    }
+</style>

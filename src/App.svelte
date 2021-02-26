@@ -5,7 +5,7 @@
 
 	let layoutComponent = DefaultLayout;
 	const routeLoading = (event: any) =>
-		(layoutComponent = event.detail.userData.layout);
+		(layoutComponent = event.detail.userData.layout || DefaultLayout);
 </script>
 
 <template>
@@ -19,5 +19,6 @@
 <style lang="scss">
 	section {
 		height: 100%;
+		border: 1px solid rgba(var(--shadow-1));
 	}
 </style>

@@ -40,6 +40,9 @@
 
 			cursor: pointer;
 
+			display: grid;
+			place-items: center;
+
 			&:hover {
 				background-color: rgba(var(--bg-highlight-color-1));
 			}
