@@ -5,26 +5,24 @@
 	}
 
 	import { push, pop, replace, link } from "svelte-spa-router";
-	import routess from "../routes.json";
+	import routesJson from "../routes.json";
 
-	let routes: route[] = routess;
+	let routes: route[] = routesJson;
 </script>
 
-<template>
-	<div class="wrapper">
-		{#each routes as route}
-			<nav on:click={() => push(route.path)}>{route.label}</nav>
-		{/each}
-	</div>
-	<slot />
-</template>
+<div class="wrapper">
+	{#each routes as route}
+		<nav on:click={() => push(route.path)}>{route.label}</nav>
+	{/each}
+</div>
+<slot />
 
 <style lang="scss">
 	.wrapper {
 		background-color: rgba(var(--nav-bg-1));
 		color: rgba(var(--txt-color-1));
 
-		border-bottom: 2px solid rgba(var(--border-burg-1));
+		border-bottom: 2px solid rgba(var(--nav-border-1));
 		height: var(--nav-top-height);
 
 		display: grid;
@@ -34,6 +32,7 @@
 		> * {
 			grid-row: 1;
 
+			user-select: none;
 			height: 100%;
 			padding: 1em;
 			white-space: nowrap;

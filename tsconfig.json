@@ -13,6 +13,16 @@
       "node"
     ],
     "module": "esnext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/app/core/*": [
+        "src/app/core/*"
+      ],
+      "src/*": [
+        "src/*"
+      ],
+    }
   }
 }

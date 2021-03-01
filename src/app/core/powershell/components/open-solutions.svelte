@@ -2,28 +2,29 @@
     import ScriptAction, { fragment } from "./script-action.svelte";
     import { createEventDispatcher } from "svelte";
     import { cleanPwsOutput } from "../../utilities/cleanPwsOutput";
-
-    import pwsConfig from "../../config/powershell.json";
+    import { pathService } from "src/app/core/services/path.service";
     import type NodePowershell from "node-powershell";
     const shell = require("node-powershell");
     const dispatch = createEventDispatcher();
 
     let allSelected = true;
     let solutions: any[] = [
-        "\\eye-share\\Eyeshare.sln",
-        "\\eye-share-auth-server\\Eyeshare.AuthServer.sln",
-        "\\eye-share-admin\\Admin.sln",
-        "\\eye-share-integrations\\Integrations.sln",
-        "\\eye-share-customers\\Customers.sln",
-        "\\eye-share-customers-global\\CustomersGlobal.sln",
+        "/eye-share/Eyeshare.sln",
+        "/eye-share-auth-server/Eyeshare.AuthServer.sln",
+        "/eye-share-admin/Admin.sln",
+        "/eye-share-integrations/Integrations.sln",
+        "/eye-share-customers/Customers.sln",
+        "/eye-share-customers-global/CustomersGlobal.sln",
     ];
 
     solutions = solutions.reduce((acc, cur) => {
-        const splitPath = cur.split("\\");
+        const splitPath = cur.split("/");
+
+        let name = splitPath.pop().replace(/\.sln/, "").split(/\./).pop();
 
         acc.push({
             path: cur,
-            name: splitPath[splitPath.length - 1].replace(".sln", ""),
+            name: name,
             active: allSelected,
         });
 
@@ -40,8 +41,8 @@
             noProfile: true,
         });
 
-        const basePath = pwsConfig.basePath;
-        const shortcut = pwsConfig.vsShortcutPath;
+        const basePath = pathService.path().base;
+        const shortcut = pathService.path().visualStudio;
 
         solutions
             .filter(({ active }) => active)

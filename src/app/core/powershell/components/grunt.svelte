@@ -6,8 +6,9 @@
     import ScriptAction, { fragment } from "./script-action.svelte";
     import { createEventDispatcher } from "svelte";
     import { cleanPwsOutput } from "../../utilities/cleanPwsOutput";
-    import pwsConfig from "../../config/powershell.json";
+    import { pathService } from "src/app/core/services/path.service";
     import type NodePowershell from "node-powershell";
+    import { invoker } from "src/app/core/powershell/invoke";
 
     const shell = require("node-powershell");
     const dispatch = createEventDispatcher();
@@ -15,27 +16,16 @@
     let build = 1;
 
     const grunt = () => {
-        const ps: NodePowershell = new shell({
-            executionPolicy: "Bypass",
-            noProfile: true,
-        });
-
-        const cmd =
-            `cd ${pwsConfig.basePath}/eye-share/Workflow;` +
-            ` grunt ${build ? Grunts.build : Grunts.watch}` +
-            ` ${force ? "--force" : ""}`;
-
-        ps.streams.stdout.on("data", (data) =>
-            dispatch("output", cleanPwsOutput(data))
+        invoker(
+            (ps: NodePowershell) => {
+                ps.addCommand(
+                    `cd ${pathService.path().base}/eye-share/Workflow;` +
+                        ` grunt ${build ? Grunts.build : Grunts.watch}` +
+                        ` ${force ? "--force" : ""}`
+                );
+            },
+            (data: any) => dispatch("output", cleanPwsOutput(data))
         );
-
-        ps.addCommand(cmd);
-        ps.invoke()
-            .then((output) => console.log(output))
-            .catch((err) => {
-                console.log(err);
-                ps.dispose();
-            });
     };
 </script>
 

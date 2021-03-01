@@ -8,6 +8,7 @@ import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import json from '@rollup/plugin-json';
 import del from 'rollup-plugin-delete'
+import alias from '@rollup/plugin-alias';
 import { publicDecrypt } from 'crypto';
 const preprocessOptions = require("./svelte.config").preprocessOptions;
 
@@ -58,7 +59,6 @@ export default {
 			}
 		}),
 
-
 		del({
 			targets: 'public/build/*',
 			runOnce: true
@@ -80,6 +80,15 @@ export default {
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
+		}),
+
+		// enable the use of aliases for paths
+		alias({
+			resolve: [".js", ".ts", ".svelte", ".json"],
+			entries: {
+				core: "./src/app/core",
+				src: "./src",
+			}
 		}),
 
 		// In dev mode, call `npm run start` once

@@ -8,8 +8,19 @@
 	import PathSelector from "../core/powershell/components/path-selector.svelte";
 	import IISManager from "../core/powershell/components/iis-manager.svelte";
 
+	const actions = [
+		Grunt,
+		OpenSolutions,
+		Clean,
+		ElasticIndex,
+		DataReplication,
+		IISManager,
+		MigratorUI,
+	];
+
 	let output = "";
-	const appendOutput = (event: CustomEvent) => (output += event.detail);
+	const appendOutput = (event: CustomEvent) =>
+		(output += "<br />" + event.detail);
 </script>
 
 <div class="wrapper">
@@ -17,24 +28,18 @@
 		<PathSelector />
 	</div>
 	<div class="command-wrapper">
-		<Grunt on:output={appendOutput} />
-		<hr />
-		<OpenSolutions on:output={appendOutput} />
-		<hr />
-		<ElasticIndex on:output={appendOutput} />
-		<hr />
-		<MigratorUI on:output={appendOutput} />
-		<hr />
-		<DataReplication on:output={appendOutput} />
-		<hr />
-		<Clean on:output={appendOutput} />
-		<hr />
-		<IISManager on:output={appendOutput} />
+		{#each actions as action}
+			<hr />
+			<svelte:component this={action} on:output={appendOutput} />
+		{/each}
 		<br />
 	</div>
 	<!--  -->
 	<div class="output-wrapper">
-		<div>Shell Output</div>
+		<div class="output-header">
+			<div>Shell Output</div>
+			<button on:click={() => (output = "")}>Clear</button>
+		</div>
 		<div class="output-normalize">
 			<hr />
 			<div class="output-reverse">
@@ -97,6 +102,38 @@
 				flex-direction: column-reverse;
 				height: clamp(5em, 30vh, 700px);
 				overflow-y: auto;
+			}
+		}
+
+		.output-header {
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+
+			button {
+				padding: 0.2em;
+				border-radius: 0.2rem;
+
+				background-color: rgba(var(--button-1));
+				color: rgba(var(--button-text-1));
+				border: 1px solid rgba(var(--shadow-1));
+
+				// lift effect
+				box-shadow: rgba(var(--shadow-1), 0.06) 0px 2px 4px,
+					rgba(var(--shadow-1), 0.05) 0px 0.5px 1px;
+				transition: all 0.2s ease-in-out;
+
+				&:hover {
+					background-color: rgba(var(--button-hover-1), 0.3);
+					text-shadow: -1px -1px 0 rgba(var(--button-text-invert-1)),
+						1px -1px 0 rgba(var(--button-text-invert-1)),
+						-1px 1px 0 rgba(var(--button-text-invert-1)),
+						1px 1px 0 rgba(var(--button-text-invert-1));
+
+					// lift effect
+					box-shadow: rgba(var(--shadow-1), 0.22) 0px 5px 5px,
+						rgba(var(--shadow-1), 0.18) 0px 2px 4px;
+				}
 			}
 		}
 	}

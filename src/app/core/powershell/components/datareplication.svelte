@@ -1,41 +1,36 @@
 <script>
-    enum Grunts {
-        build = "build",
-        watch = "watch",
-    }
     import ScriptAction, { fragment } from "./script-action.svelte";
     import { createEventDispatcher } from "svelte";
     import { cleanPwsOutput } from "../../utilities/cleanPwsOutput";
-    import pwsConfig from "../../config/powershell.json";
+    import { pathService } from "src/app/core/services/path.service";
+    import { invoker } from "../invoke";
     import type NodePowershell from "node-powershell";
 
-    const shell = require("node-powershell");
     const dispatch = createEventDispatcher();
-    let force = false;
-    let build = 1;
+    let runner = false;
 
-    const grunt = () => {
-        const ps: NodePowershell = new shell({
-            executionPolicy: "Bypass",
-            noProfile: true,
-        });
+    const command = () => {
+        invoker(
+            (ps: NodePowershell) => {
+                ps.addCommand("Write-Host 'Data Replication Started'");
+                ps.addCommand(
+                    `& ${pathService.path().base}/` +
+                        "eye-shareWorkflow/build/binTaskmaster.exe " +
+                        "run 'integration data replication';"
+                );
 
-        const cmd =
-            `cd ${pwsConfig.basePath}/eye-share/Workflow;` +
-            ` grunt ${build ? Grunts.build : Grunts.watch}` +
-            ` ${force ? "--force" : ""}`;
+                if (runner) {
+                    ps.addCommand(
+                        `& ${pathService.path().base}/` +
+                            `eye-shareWorkflow/build/binTaskmaster.exe ` +
+                            `run 'integration data replication runner';`
+                    );
+                }
 
-        ps.streams.stdout.on("data", (data) =>
-            dispatch("output", cleanPwsOutput(data))
+                ps.addCommand("Write-Host 'Data Replication Completed'");
+            },
+            (data: any) => dispatch("output", cleanPwsOutput(data))
         );
-
-        ps.addCommand(cmd);
-        ps.invoke()
-            .then((output) => console.log(output))
-            .catch((err) => {
-                console.log(err);
-                ps.dispose();
-            });
     };
 </script>
 
@@ -43,17 +38,13 @@
 
 <ScriptAction>
     <template use:fragment>
-        <button on:click={grunt}> Data Replication </button>
+        <button on:click={command}> Data Replication </button>
     </template>
 
     <template use:fragment slot="options">
         <div>
-            <label for="gruntBuild">regular</label>
-            <input id="gruntBuild" type="radio" bind:group={build} value={1} />
-        </div>
-        <div>
-            <label for="gruntWatch">masterdata</label>
-            <input id="gruntWatch" type="radio" bind:group={build} value={0} />
+            <label for="runner">Execute runner</label>
+            <input id="runner" type="checkbox" bind:checked={runner} />
         </div>
     </template>
 </ScriptAction>
