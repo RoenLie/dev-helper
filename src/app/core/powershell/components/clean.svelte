@@ -21,6 +21,7 @@
                             pathService.path().base
                         }/eye-share/Workflow/build' -Recurse;`
                 );
+                // Remove-Item -Path $home\.nuget\packages\tracer.fody -Recurse
                 ps.addCommand(
                     "& 'C:/Program Files/Redis/redis-cli.exe' 'flushall';"
                 );

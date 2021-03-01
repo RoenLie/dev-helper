@@ -1,4 +1,5 @@
 <script>
+    import { pathService } from "src/app/core/services/path.service";
     let initiated = false;
 
     let paths = {
@@ -12,8 +13,9 @@
         if (!initiated) {
             paths = JSON.parse(window.localStorage.getItem("paths"));
             initiated = true;
+        } else {
+            window.localStorage.setItem("paths", JSON.stringify(paths));
         }
-        window.localStorage.setItem("paths", JSON.stringify(paths));
     }
 </script>
 

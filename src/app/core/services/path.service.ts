@@ -7,7 +7,19 @@ interface localPaths {
 
 
 export class PathService {
-    constructor() { }
+    constructor() {
+        const paths = window.localStorage.getItem("paths");
+
+        if (!paths) {
+            const paths = {
+                msBuild: "",
+                visualStudio: "",
+                cleanup: "",
+                base: ""
+            };
+            window.localStorage.setItem("paths", JSON.stringify(paths));
+        }
+    }
 
     path = (): localPaths => JSON.parse(window.localStorage.getItem("paths"));
 }

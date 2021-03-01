@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const production = !process.env.ROLLUP_WATCH;
 
 // require('update-electron-app')();
 
@@ -21,7 +22,9 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+
+  if (!production)
+    mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
